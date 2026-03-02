@@ -1,54 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เว็บแจ้งปัญหาในชุมชน</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ระบบรับแจ้งปัญหา - ร่วมสร้างเมืองน่าอยู่</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-้    <header>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <h1 class="logo">แจ้งปัญหา</h1>
+            <ul class="nav-links">
+                <li><a href="#" class="active">หน้าหลัก</a></li>
+                <li><a href="/report">แจ้งปัญหา</a></li>
+                <li><a href="#">ปัญหาของคุณ</a></li>
+                <li><a href="#">ค้นหา</a></li>
+                <li><a href="#">แผงควบคุม</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <nav>
-        <img src="/image/Logo.png" style="width: 139px; height: 140px;">
-
-            <a href="" class="menu-item">
-            <div>
-                <img src="/image/reportlogo.png" style="width: 90px; height: 90px;">
-                <h4>แจ้งเรื่อง</h4>
+    <header class="hero">
+        <div class="hero-content">
+            <p class="sub-title">แจ้งปัญหาง่ายๆ ติดตามผลได้</p>
+            <h2 class="main-title">ระบบรับแจ้งปัญหา <br> ร่วมสร้างเมืองน่าอยู่</h2>
+            <p class="description">แจ้งปัญหาในชุมชนของคุณ ง่ายและรวดเร็ว ติดตามสถานะการแก้ไขได้ตลอดเวลา</p>
+            <div class="btn-group">
+                <form action="/report" method="GET">
+                <button class="btn btn-white">แจ้งปัญหาใหม่</button>
+                </form>
+                <button class="btn btn-white">ติดตามปัญหา</button>
             </div>
-            </a>
-
-            <a href="" class="menu-item">
-            <div>
-                <img src="/image/doreporrt.png" style="width: 90px; height: 90px;">
-                <h4>ดูเรื่องที่แจ้ง</h4>
-            </div>
-            </a>
-
-            <a href="" class="menu-item">
-            <div>
-                <img src="/image/doreportall.png" style="width: 90px; height: 90px;">
-                <h4>เรื่องแจ้งจากผู้อื่น</h4>
-            </div>
-            </a>
-
-            <a href="" >
-                <div class="Logo-login" >
-                    <img src="/image/loginlogo.png" style="width: 50px; height: 50px;">
-                </div>
-                
-            </a>
-            <h5>ออกจากระบบ</h5>
-
-            <div>
-
-            </div>
-            
-        </nav>
+        </div>
     </header>
 
-    
+    <section class="container status-section">
+        <div class="status-grid">
+            <div class="status-card bg-orange">
+                <span class="count">1</span>
+                <p>ปัญหาทั้งหมด</p>
+            </div>
+            <div class="status-card bg-amber">
+                <span class="count">1</span>
+                <p>รอดำเนินการ</p>
+            </div>
+            <div class="status-card bg-blue">
+                <span class="count">1</span>
+                <p>กำลังดำเนินการ</p>
+            </div>
+            <div class="status-card bg-green">
+                <span class="count">1</span>
+                <p>แก้ไขแล้ว</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="container issues-section">
+        <h3 class="section-title">ปัญหาล่าสุด</h3>
+        <div class="issues-grid">
+            
+            <div class="issue-card">
+                <span class="badge badge-amber">รอดำเนินการ</span>
+                <div class="issue-body">
+                    <div class="icon-box">🗑️</div>
+                    <div class="text-content">
+                        <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
+                        <p>ขยะถูกทิ้งรวมกองใหญ่ริมถนน ส่งกลิ่นเหม็นมาก มีแมลงและสัตว์จำนวนมาก</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <span class="badge badge-blue">กำลังดำเนินการ</span>
+                <div class="issue-body">
+                    <div class="icon-box">🗑️</div>
+                    <div class="text-content">
+                        <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
+                        <p>เจ้าหน้าที่กำลังเข้าตรวจสอบพื้นที่และดำเนินการจัดเก็บ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="issue-card">
+                <span class="badge badge-green">แก้ไขแล้ว</span>
+                <div class="issue-body">
+                    <div class="icon-box">🗑️</div>
+                    <div class="text-content">
+                        <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
+                        <p>ดำเนินการแก้ไขเรียบร้อยแล้ว ขอบคุณที่แจ้งปัญหาเข้ามาครับ</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
 </body>
 </html>

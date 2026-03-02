@@ -1,0 +1,274 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+.navbar {
+    background: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: #ff9800;
+}
+
+
+.hero {
+    background-color: #fdb03d;
+    color: white;
+    padding: 60px 20px 100px 20px;
+    text-align: center;
+}
+
+.sub-title {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-weight: 300;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Kanit';
+    transition: 0.3s;
+}
+
+.btn-white {
+    background: white;
+    color: #ff9800;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+
+.status-section {
+    margin-top: -50px;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.status-card {
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.bg-orange { background: #ff7043; }
+.bg-amber { background: #ffa726; }
+.bg-blue { background: #42a5f5; }
+.bg-green { background: #66bb6a; }
+
+.status-card .count {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+
+.issues-section {
+    padding: 50px 0;
+}
+
+.section-title {
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+}
+
+.issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.issue-card {
+    background: white;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid #eee;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 0.7rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.badge-amber { background: #fff8e1; color: #ffa000; }
+.badge-blue { background: #e3f2fd; color: #1976d2; }
+.badge-green { background: #e8f5e9; color: #388e3c; }
+
+.issue-body {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.icon-box {
+    background: #e8f5e9;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+}
+
+.text-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.text-content p {
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.5;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+
+
+
+.modal-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    text-decoration: none;
+    color: #999;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+
+.modal-title {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-family: 'Kanit';
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-family: 'Kanit';
+    cursor: pointer;
+    margin-top: 10px;
+}
