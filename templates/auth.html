@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เข้าสู่ระบบ / สมัครสมาชิก - ระบบแจ้งปัญหา</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-box" id="login-box">
+            <h2>เข้าสู่ระบบ</h2>
+            <p>ยินดีต้อนรับกลับมา! กรุณาเข้าสู่ระบบเพื่อแจ้งปัญหา</p>
+
+            {% if error %}
+            <div class="error-message">
+            {{ error }}
+            </div>
+            {% endif %}
+            
+            <form method="POST" action="/login">
+
+<div class="input-group">
+<label>เบอร์โทรศัพท์</label>
+<input type="text" name="phone" required>
+</div>
+
+<div class="input-group">
+<label>รหัสผ่าน</label>
+<input type="password" name="password" required>
+</div>
+
+<button type="submit" class="btn-auth">เข้าสู่ระบบ</button>
+
+</form>
+            
+            <div class="switch-form">
+                ยังไม่มีบัญชี? <a href="#" onclick="toggleForm()">สมัครสมาชิกใหม่</a>
+            </div>
+        </div>
+
+        <div class="auth-box hidden" id="register-box">
+            <h2>สมัครสมาชิก</h2>
+            <p>ร่วมเป็นส่วนหนึ่งในการสร้างเมืองที่น่าอยู่กับเรา</p>
+            
+<form method="POST" action="/register">
+
+<div class="input-group">
+<label>ชื่อ-นามสกุล</label>
+<input type="text" name="fullname" required>
+</div>
+
+<div class="input-group">
+<label>เบอร์โทรศัพท์</label>
+<input type="tel" name="phone" required>
+</div>
+
+<div class="input-group">
+<label>รหัสผ่าน</label>
+<input type="password" name="password" required>
+</div>
+
+<div class="input-group">
+<label>ยืนยันรหัสผ่าน</label>
+<input type="password" name="confirm_password" required>
+</div>
+
+<button type="submit" class="btn-auth">สร้างบัญชี</button>
+
+</form>
+            
+            <div class="switch-form">
+                มีบัญชีอยู่แล้ว? <a href="#" onclick="toggleForm()">กลับไปเข้าสู่ระบบ</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            document.getElementById('login-box').classList.toggle('hidden');
+            document.getElementById('register-box').classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
