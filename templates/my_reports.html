@@ -10,27 +10,28 @@
 </head>
 <body>
 
-<!-- navbar -->
 <nav class="navbar">
-    <div class="nav-container">
-        <div class="brand">แจ้งปัญหา</div>
+<div class="nav-container">
 
-        <ul class="nav-links">
-            <li><a href="/">หน้าหลัก</a></li>
-            <li><a href="/report">แจ้งปัญหา</a></li>
-            <li><a href="/my_reports">ปัญหาของคุณ</a></li>
-        </ul>
+<div class="brand">แจ้งปัญหา</div>
 
-        <div class="auth-buttons">
-            <a href="/logout" class="btn-logout">Logout</a>
-        </div>
-    </div>
+<ul class="nav-links">
+<li><a href="/">หน้าหลัก</a></li>
+<li><a href="/report">แจ้งปัญหา</a></li>
+<li><a href="/my_reports">ปัญหาของคุณ</a></li>
+</ul>
+
+<div class="auth-buttons">
+<a href="/logout" class="btn-logout">Logout</a>
+</div>
+
+</div>
 </nav>
 
 
 <main class="content-section">
 
-<h3>ปัญหาที่คุณแจ้ง</h3>
+<h2>ปัญหาที่คุณแจ้ง</h2>
 
 <div class="issue-grid">
 
@@ -38,36 +39,32 @@
 
 <div class="issue-card">
 
-    <div class="card-header">
+{% if r[2] %}
+<img src="{{ url_for('static', filename='uploads/' + r[2]) }}">
+{% endif %}
 
-        <div class="issue-icon">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
+<h3>{{ r[0] }}</h3>
 
-        {% if r[3] == "รอดำเนินการ" %}
-        <span class="status-badge yellow">{{ r[3] }}</span>
+<p>{{ r[1] }}</p>
 
-        {% elif r[3] == "กำลังดำเนินการ" %}
-        <span class="status-badge blue">{{ r[3] }}</span>
+<p>
+<i class="fa-solid fa-location-dot"></i>
+{{ r[3] }}
+</p>
 
-        {% else %}
-        <span class="status-badge green">{{ r[3] }}</span>
-        {% endif %}
+<p>
+<i class="fa-solid fa-user"></i>
+{{ r[4] }}
+</p>
 
-    </div>
+<p class="status">
+สถานะ: {{ r[5] }}
+</p>
 
-    <div class="card-body">
-
-        <h4>{{ r[0] }}</h4>
-
-        <p>{{ r[1] }}</p>
-
-        {% if r[2] %}
-        <img class="report-image"
-        src="{{ url_for('static', filename='uploads/' + r[2]) }}">
-        {% endif %}
-
-    </div>
+<p class="date">
+<i class="fa-regular fa-clock"></i>
+{{ r[6][:10] }}
+</p>
 
 </div>
 

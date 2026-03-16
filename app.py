@@ -211,7 +211,7 @@ def my_reports():
     cur = conn.cursor()
 
     cur.execute("""
-    SELECT title,detail,image,status,created_at
+    SELECT title,detail,image,location,reporter_name,status,created_at
     FROM reports
     WHERE user_id=?
     ORDER BY created_at DESC
