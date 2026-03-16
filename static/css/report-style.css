@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
+}
+
+body {
+    background-color: #fff9e6; /* พื้นหลังสีนวลตามรูป */
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ปุ่มย้อนกลับ */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: #c5caff; /* สีม่วงอ่อนตามรูป */
+    padding: 5px 20px;
+    border-radius: 50px;
+}
+
+.back-link i {
+    margin-right: 10px;
+}
+
+/* การ์ดฟอร์ม */
+.form-card {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+/* สไตล์ของ Input ตามรูป */
+input[type="text"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 15px 25px;
+    border: 1px solid #aaa;
+    border-radius: 50px; /* ทรงมนยาวตามรูป */
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+textarea {
+    border-radius: 25px; /* ลดความมนลงเล็กน้อยสำหรับกล่องข้อความใหญ่ */
+    resize: none;
+}
+
+input:focus, textarea:focus {
+    border-color: #ff9800;
+    box-shadow: 0 0 5px rgba(255, 152, 0, 0.2);
+}
+
+/* ส่วนอัปโหลดรูปภาพ */
+.file-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#file-input {
+    display: none; /* ซ่อน input มาตรฐาน */
+}
+
+.file-label {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #666;
+    text-align: left;
+}
+
+/* จัดวาง 2 คอลัมน์ด้านล่าง */
+.row {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* ปุ่มกดส่ง */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background: #e68a00;
+}

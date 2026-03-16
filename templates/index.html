@@ -15,8 +15,8 @@
             <ul class="nav-links">
                 <li><a href="#">หน้าหลัก</a></li>
                 <li><a href="/report">แจ้งปัญหา</a></li>
-                <li><a href="#">ปัญหาของคุณ</a></li>
-                <li><a href="#">แผงควบคุม</a></li>
+                <li><a href="/my_reports">ปัญหาของคุณ</a></li>
+                <li><a href="{{ url_for('dashboard') }}">แผงควบคุม</a></li>
             </ul>
             <div class="auth-buttons">
                 {% if session.get("user_id") %}
@@ -35,7 +35,9 @@
             <p>แจ้งปัญหาในชุมชนของคุณ ง่ายและรวดเร็ว ติดตามสถานะการแก้ไขได้ตลอดเวลา</p>
             <div class="hero-actions">
                 <a href="/report"><button class="btn-primary">แจ้งปัญหาใหม่</button></a>
-                <button class="btn-secondary">ติดตามปัญหา</button>
+                <a href="/my_reports">
+                    <button class="btn-secondary">ติดตามปัญหา</button>
+                </a>
             </div>
         </div>
     </header>
@@ -43,22 +45,22 @@
     <section class="stats-container">
         <div class="stat-card orange">
             <i class="fa-solid fa-file-lines"></i>
-            <div class="stat-num">1</div>
+            <div class="stat-num">{{ total }}</div>
             <div class="stat-label">ปัญหาทั้งหมด</div>
         </div>
         <div class="stat-card yellow">
             <i class="fa-regular fa-clock"></i>
-            <div class="stat-num">1</div>
+            <div class="stat-num">{{ pending }}</div>
             <div class="stat-label">รอดำเนินการ</div>
         </div>
         <div class="stat-card blue">
             <i class="fa-solid fa-spinner"></i>
-            <div class="stat-num">1</div>
+            <div class="stat-num">{{ processing }}</div>
             <div class="stat-label">กำลังดำเนินการ</div>
         </div>
         <div class="stat-card green">
             <i class="fa-regular fa-circle-check"></i>
-            <div class="stat-num">1</div>
+            <div class="stat-num">{{ done }}</div>
             <div class="stat-label">แก้ไขแล้ว</div>
         </div>
     </section>
@@ -66,37 +68,40 @@
     <main class="content-section">
         <h3>ปัญหาล่าสุด</h3>
         <div class="issue-grid">
-            <div class="issue-card">
-                <div class="card-header">
-                    <div class="issue-icon"><i class="fa-solid fa-trash"></i></div>
-                    <span class="status-badge yellow">รอดำเนินการ</span>
-                </div>
-                <div class="card-body">
-                    <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
-                    <p>ขยะถูกทิ้งรวมกองใหญ่ริมถนน ส่งกลิ่นเหม็นมาก มีแมลงสะสมจำนวนมาก</p>
-                </div>
-            </div>
-            <div class="issue-card">
-                <div class="card-header">
-                    <div class="issue-icon"><i class="fa-solid fa-trash"></i></div>
-                    <span class="status-badge yellow">รอดำเนินการ</span>
-                </div>
-                <div class="card-body">
-                    <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
-                    <p>ขยะถูกทิ้งรวมกองใหญ่ริมถนน ส่งกลิ่นเหม็นมาก มีแมลงสะสมจำนวนมาก</p>
-                </div>
-            </div>
-            <div class="issue-card">
-                <div class="card-header">
-                    <div class="issue-icon"><i class="fa-solid fa-trash"></i></div>
-                    <span class="status-badge green">แก้ไขแล้ว</span>
-                </div>
-                <div class="card-body">
-                    <h4>ขยะกองรวมริมถนนไม่มีคนเก็บ</h4>
-                    <p>ขยะถูกทิ้งรวมกองใหญ่ริมถนน ส่งกลิ่นเหม็นมาก มีแมลงสะสมจำนวนมาก</p>
-                </div>
-            </div>
+
+{% for report in reports %}
+
+<div class="issue-card">
+
+    <div class="card-header">
+
+        <div class="issue-icon">
+            {% if report[3] %}
+            <img src="{{ url_for('static', filename='uploads/' ~ report[3]) }}" width="40">
+            {% else %}
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            {% endif %}
         </div>
+
+        <span class="status-badge yellow">
+            {{ report[4] }}
+        </span>
+
+    </div>
+
+    <div class="card-body">
+
+        <h4>{{ report[1] }}</h4>
+
+        <p>{{ report[2] }}</p>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
     </main>
 
 </body>

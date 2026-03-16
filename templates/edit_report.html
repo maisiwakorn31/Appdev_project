@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>แก้ไขปัญหา</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 class="page-title">แก้ไขปัญหา</h2>
+
+<div class="form-card">
+
+<form method="POST">
+
+<label>หัวข้อปัญหา</label>
+<input type="text" name="title" value="{{ report[0] }}" required>
+
+<label>รายละเอียด</label>
+<textarea name="detail" rows="5" required>{{ report[1] }}</textarea>
+
+<button type="submit" class="btn-save">
+💾 บันทึกการแก้ไข
+</button>
+
+<a href="/dashboard" class="btn-cancel">
+ยกเลิก
+</a>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

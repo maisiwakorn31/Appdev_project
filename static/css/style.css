@@ -185,3 +185,127 @@ body {
 
 .status-badge.yellow { background: #ffb300; }
 .status-badge.green { background: #66bb6a; }
+
+.report-image{
+
+width:100%;
+margin-top:10px;
+border-radius:10px;
+
+}
+
+.issue-card{
+
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+
+}
+
+.issue-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+
+}
+
+.container{
+width:90%;
+max-width:1000px;
+margin:auto;
+margin-top:40px;
+}
+
+.page-title{
+font-size:26px;
+margin-bottom:20px;
+}
+
+.dashboard-card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.report-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.report-table th,
+.report-table td{
+padding:12px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.status{
+padding:5px 10px;
+border-radius:15px;
+font-size:13px;
+}
+
+.status.รอดำเนินการ{
+background:#ffeaa7;
+}
+
+.status.กำลังดำเนินการ{
+background:#74b9ff;
+color:white;
+}
+
+.status.แก้ไขแล้ว{
+background:#55efc4;
+}
+
+.btn-edit{
+background:#3498db;
+color:white;
+padding:6px 10px;
+border-radius:5px;
+text-decoration:none;
+font-size:14px;
+}
+
+.btn-delete{
+background:#e74c3c;
+color:white;
+padding:6px 10px;
+border-radius:5px;
+text-decoration:none;
+font-size:14px;
+}
+
+.form-card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.btn-save{
+background:#27ae60;
+color:white;
+padding:10px 15px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.btn-cancel{
+margin-left:10px;
+text-decoration:none;
+color:#555;
+}
