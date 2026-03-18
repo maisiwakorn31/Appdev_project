@@ -4,14 +4,14 @@ import sqlite3
 conn = sqlite3.connect("users.db")
 cur = conn.cursor()
 
-# กำหนดชื่อที่คุณต้องการให้เป็น Admin (พิมพ์ให้ตรงกับที่สมัครไว้เป๊ะๆ นะครับ)
+# กำหนดชื่อคนที่ต้องการเปลี่ยนสิทธิ์กลับเป็น User
 my_name = "nutthapol bovaree" 
 
-# สั่งอัปเดตตาราง users ให้ role เป็น 'admin' เฉพาะคนที่มี fullname ตรงกับ my_name
-cur.execute("UPDATE users SET role = 'admin' WHERE fullname = ?", (my_name,))
+# สั่งอัปเดตตาราง users ให้ role เป็น 'user' เฉพาะคนที่มี fullname ตรงกับ my_name
+cur.execute("UPDATE users SET role = 'user' WHERE fullname = ?", (my_name,))
 
 # บันทึกและปิดการเชื่อมต่อ
 conn.commit()
 conn.close()
 
-print(f"เปลี่ยนสิทธิ์ให้คุณ {my_name} เป็น Admin สำเร็จแล้ว!")
+print(f"เปลี่ยนสิทธิ์ให้คุณ {my_name} กลับเป็น User สำเร็จแล้ว!")
