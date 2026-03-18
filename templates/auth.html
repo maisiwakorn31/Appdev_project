@@ -21,21 +21,17 @@
             {% endif %}
             
             <form method="POST" action="/login">
+                <div class="input-group">
+                    <label>เบอร์โทรศัพท์</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="input-group">
+                    <label>รหัสผ่าน</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-auth">เข้าสู่ระบบ</button>
+            </form>
 
-            <div class="input-group">
-            <label>เบอร์โทรศัพท์</label>
-            <input type="text" name="phone" required>
-            </div>
-
-            <div class="input-group">
-            <label>รหัสผ่าน</label>
-            <input type="password" name="password" required>
-            </div>
-
-            <button type="submit" class="btn-auth">เข้าสู่ระบบ</button>
-
-
-    </form> 
             <div class="switch-form">
                 ยังไม่มีบัญชี? <a href="#" onclick="toggleForm()">สมัครสมาชิกใหม่</a>
             </div>
@@ -45,31 +41,25 @@
             <h2>สมัครสมาชิก</h2>
             <p>ร่วมเป็นส่วนหนึ่งในการสร้างเมืองที่น่าอยู่กับเรา</p>
             
-    <form method="POST" action="/register">
-
-<div class="input-group">
-<label>ชื่อ-นามสกุล</label>
-<input type="text" name="fullname" required>
-</div>
-
-<div class="input-group">
-<label>เบอร์โทรศัพท์</label>
-<input type="tel" name="phone" required>
-</div>
-
-<div class="input-group">
-<label>รหัสผ่าน</label>
-<input type="password" name="password" required>
-</div>
-
-<div class="input-group">
-<label>ยืนยันรหัสผ่าน</label>
-<input type="password" name="confirm_password" required>
-</div>
-
-<button type="submit" class="btn-auth">สร้างบัญชี</button>
-
-</form>
+            <form method="POST" action="/register">
+                <div class="input-group">
+                    <label>ชื่อ-นามสกุล</label>
+                    <input type="text" name="fullname" required>
+                </div>
+                <div class="input-group">
+                    <label>เบอร์โทรศัพท์</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="input-group">
+                    <label>รหัสผ่าน</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label>ยืนยันรหัสผ่าน</label>
+                    <input type="password" name="confirm_password" required>
+                </div>
+                <button type="submit" class="btn-auth">สร้างบัญชี</button>
+            </form>
             
             <div class="switch-form">
                 มีบัญชีอยู่แล้ว? <a href="#" onclick="toggleForm()">กลับไปเข้าสู่ระบบ</a>

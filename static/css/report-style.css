@@ -1,146 +1,181 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Sarabun', sans-serif;
+/* =====================
+REPORT PAGE
+===================== */
+
+body.report-page {
+    background: #FFF8E8;
+    min-height: 100vh;
 }
 
-body {
-    background-color: #fff9e6; /* พื้นหลังสีนวลตามรูป */
-    display: flex;
-    justify-content: center;
-    padding: 40px 20px;
+/* PAGE HEADER */
+.report-header {
+    padding: 30px 5% 10px;
 }
 
-.container {
-    width: 100%;
-    max-width: 800px;
+.report-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
 }
 
-/* ปุ่มย้อนกลับ */
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    background: #c5caff; /* สีม่วงอ่อนตามรูป */
-    padding: 5px 20px;
-    border-radius: 50px;
+.report-header p {
+    font-size: 14px;
+    color: #888;
 }
 
-.back-link i {
-    margin-right: 10px;
+/* CONTAINER */
+.report-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 10px 20px 50px;
 }
 
-/* การ์ดฟอร์ม */
-.form-card {
+/* CARD */
+.report-card {
     background: white;
-    padding: 40px;
-    border-radius: 30px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 30px 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
 }
 
-.form-group {
+/* FORM GROUP */
+.rform-group {
     margin-bottom: 20px;
+}
+
+.rform-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.rform-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Sarabun', sans-serif;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s;
+    color: #333;
+    margin: 0;
+}
+
+.rform-input:focus {
+    border-color: #F59E0B;
+}
+
+.rform-input[readonly] {
+    background: #F9FAFB;
+    color: #555;
+    cursor: default;
+}
+
+/* FILE INPUT */
+.file-input-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.file-input-label:hover {
+    border-color: #F59E0B;
+}
+
+/* LOCATION ROW */
+.location-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.location-row .rform-input {
     flex: 1;
 }
 
-.form-group label {
-    display: block;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #000;
-}
-
-/* สไตล์ของ Input ตามรูป */
-input[type="text"],
-input[type="tel"],
-textarea {
-    width: 100%;
-    padding: 15px 25px;
-    border: 1px solid #aaa;
-    border-radius: 50px; /* ทรงมนยาวตามรูป */
-    font-size: 1rem;
-    outline: none;
-    transition: 0.3s;
-}
-
-textarea {
-    border-radius: 25px; /* ลดความมนลงเล็กน้อยสำหรับกล่องข้อความใหญ่ */
-    resize: none;
-}
-
-input:focus, textarea:focus {
-    border-color: #ff9800;
-    box-shadow: 0 0 5px rgba(255, 152, 0, 0.2);
-}
-
-/* ส่วนอัปโหลดรูปภาพ */
-.file-upload-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-#file-input {
-    display: none; /* ซ่อน input มาตรฐาน */
-}
-
-.file-label {
-    display: block;
-    width: 100%;
-    padding: 15px 25px;
-    background: #fff;
-    border: 1px solid #aaa;
-    border-radius: 50px;
+.btn-location {
+    width: 44px;
+    height: 44px;
+    background: #FFF3CD;
+    border: 1px solid #F59E0B;
+    border-radius: 10px;
+    color: #F59E0B;
+    font-size: 18px;
     cursor: pointer;
-    color: #666;
-    text-align: left;
-}
-
-/* จัดวาง 2 คอลัมน์ด้านล่าง */
-.row {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
 }
 
-@media (max-width: 600px) {
-    .row {
-        flex-direction: column;
-        gap: 0;
-    }
+.btn-location:hover {
+    background: #FFE69C;
 }
 
-/* ปุ่มกดส่ง */
+/* ROW 2 COLUMNS */
+.rform-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+/* CATEGORY GRID */
+.category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cat-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: #F3F4F6;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.cat-btn:hover {
+    background: #FFF3CD;
+    border-color: #F59E0B;
+}
+
+.cat-btn.active {
+    background: #FFF3CD;
+    border-color: #F59E0B;
+    box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+}
+
+/* SUBMIT BUTTON */
 .btn-submit {
-    display: block;
     width: 100%;
     padding: 15px;
-    margin-top: 20px;
-    background: #ff9800;
+    background: #F59E0B;
     color: white;
     border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Sarabun', sans-serif;
     cursor: pointer;
-    transition: 0.3s;
+    margin-top: 8px;
+    transition: background 0.2s;
 }
 
 .btn-submit:hover {
-    background: #e68a00;
-}
-
-.btn-location{
-margin-top:10px;
-padding:8px 12px;
-background:#3498db;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
+    background: #D97706;
 }

@@ -3,92 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายงานปัญหา</title>
+    <title>แจ้งปัญหา</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/report-style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
-<body>
+<body class="report-page">
 
-    <div class="container">
-        <a href="/" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> ย้อนกลับ
-        </a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">แจ้งปัญหา</div>
+            <ul class="nav-links">
+                <li><a href="/">หน้าหลัก</a></li>
+                <li><a href="/report">แจ้งปัญหา</a></li>
+                <li><a href="/my_reports">ปัญหาของคุณ</a></li>
+                <li><a href="/search">ค้นหา</a></li>
+                {% if session.get("role") == "admin" %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">แผงควบคุม</a></li>
+                {% endif %}
+            </ul>
+            <div class="auth-buttons">
+                {% if session.get("user_id") %}
+                    <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                    <a href="/logout" class="btn-logout">Logout</a>
+                {% else %}
+                    <a href="/login" class="btn-login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
-        <div class="form-card">
+    <!-- PAGE HEADER -->
+    <div class="report-header">
+        <h2>แจ้งปัญหา</h2>
+        <p>กรอกรายละเอียดเพื่อแจ้งปัญหาที่พบ</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="report-container">
+        <div class="report-card">
             <form action="/report" method="POST" enctype="multipart/form-data">
-                
-                <div class="form-group">
-                    <label>หัวข้อปัญหา</label>
-                    <input type="text" name="title" placeholder="ระบุหัวข้อปัญหา">
+
+                <!-- ประเภทปัญหา -->
+                <div class="rform-group">
+                    <label class="rform-label">ประเภทปัญหา</label>
+                    <div class="category-grid">
+                        <button type="button" class="cat-btn active" data-value="ถนน" onclick="selectCategory(this)">
+                            <span>🚧</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="น้ำ" onclick="selectCategory(this)">
+                            <span>💧</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="ไฟฟ้า" onclick="selectCategory(this)">
+                            <span>⚡</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="ความปลอดภัย" onclick="selectCategory(this)">
+                            <span>🛡️</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="น้ำท่วม" onclick="selectCategory(this)">
+                            <span>🌧️</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="การจราจร" onclick="selectCategory(this)">
+                            <span>🚦</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="ต้นไม้" onclick="selectCategory(this)">
+                            <span>🌲</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="มลพิษ" onclick="selectCategory(this)">
+                            <span>💨</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="ขยะ" onclick="selectCategory(this)">
+                            <span>🗑️</span>
+                        </button>
+                        <button type="button" class="cat-btn" data-value="อื่นๆ" onclick="selectCategory(this)">
+                            <span>❓</span>
+                        </button>
+                    </div>
+                    <input type="hidden" name="category" id="category-input" value="ถนน">
                 </div>
 
-                <div class="form-group">
-                    <label>รายละเอียด</label>
-                    <textarea name="detail" rows="3" placeholder="อธิบายรายละเอียดเพิ่มเติม"></textarea>
+                <!-- หัวข้อปัญหา -->
+                <div class="rform-group">
+                    <label class="rform-label">หัวข้อปัญหา</label>
+                    <input type="text" name="title" class="rform-input" placeholder="">
                 </div>
 
-                <div class="form-group">
-                    <label>รูปภาพประกอบ</label>
-                    <div class="file-upload-wrapper">
-                        <input type="file" name="image" id="file-input" accept="image/*">
-                        <label for="file-input" class="file-label">
-                            <i class="fa-solid fa-camera"></i> เลือกรูปภาพหรือถ่ายภาพ
-                        </label>
+                <!-- รายละเอียด -->
+                <div class="rform-group">
+                    <label class="rform-label">รายละเอียด</label>
+                    <input type="text" name="detail" class="rform-input" placeholder="">
+                </div>
+
+                <!-- รูปภาพ -->
+                <div class="rform-group">
+                    <label class="rform-label">รูปภาพประกอบ</label>
+                    <label for="file-input" class="rform-input file-input-label">
+                        <span id="file-name">เลือกไฟล์รูปภาพ</span>
+                        <i class="fa-solid fa-camera" style="color:#aaa;"></i>
+                    </label>
+                    <input type="file" name="image" id="file-input" accept="image/*" style="display:none"
+                           onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'เลือกไฟล์รูปภาพ'">
+                </div>
+
+                <!-- สถานที่ -->
+                <div class="rform-group">
+                    <label class="rform-label">สถานที่</label>
+                    <div class="location-row">
+                        <input type="text" id="location" name="location" class="rform-input" placeholder="" readonly>
+                        <button type="button" class="btn-location" onclick="getLocation()">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </button>
                     </div>
                 </div>
 
-                <div class="form-group">
-                <label>สถานที่</label>
-
-                <input type="text" id="location" name="location" placeholder="ตำแหน่งจะถูกระบุอัตโนมัติ" readonly>
-
-                <button type="button" class="btn-location" onclick="getLocation()">
-                    <i class="fa-solid fa-location-dot"></i> ใช้ตำแหน่งปัจจุบัน
-                </button>
-
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label>ชื่อผู้แจ้ง</label>
-                        <input type="text" name="reporter_name" value="{{ user[0] }}" readonly>
+                <!-- ชื่อ + เบอร์ -->
+                <div class="rform-row">
+                    <div class="rform-group">
+                        <label class="rform-label">ชื่อผู้แจ้ง</label>
+                        <input type="text" name="reporter_name" class="rform-input" value="{{ user[0] }}" readonly>
                     </div>
-                    <div class="form-group">
-                        <label>เบอร์โทรศัพท์</label>
-                        <input type="tel" name="phone" value="{{ user[1] }}" readonly>
+                    <div class="rform-group">
+                        <label class="rform-label">เบอร์โทรศัพท์</label>
+                        <input type="tel" name="phone" class="rform-input" value="{{ user[1] }}" readonly>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit">ส่งรายงานปัญหา</button>
+                <!-- Submit -->
+                <button type="submit" class="btn-submit">ส่งเรื่องแจ้ง</button>
+
             </form>
         </div>
     </div>
 
     <script>
+        function selectCategory(btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('category-input').value = btn.dataset.value;
+        }
 
-    function getLocation() {
-
-        if (navigator.geolocation) {
-
-    navigator.geolocation.getCurrentPosition(function(position) {
-
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
-
-    document.getElementById("location").value =
-    "Lat: " + lat + ", Lng: " + lon;
-
-    });
-
-    } else {
-
-    alert("Browser ไม่รองรับการระบุตำแหน่ง");
-
-    }
-
-    }
-
-</script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    document.getElementById('location').value =
+                        'Lat: ' + pos.coords.latitude.toFixed(5) + ', Lng: ' + pos.coords.longitude.toFixed(5);
+                });
+            } else {
+                alert('Browser ไม่รองรับการระบุตำแหน่ง');
+            }
+        }
+    </script>
 
 </body>
 </html>

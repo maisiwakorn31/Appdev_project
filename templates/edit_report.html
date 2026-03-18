@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>อัพเดตสถานะ</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
     <style>
-        /* ตั้งค่าเริ่มต้นและฟอนต์ */
         body.edit-page {
             font-family: 'Prompt', sans-serif;
-            background-color: #2D2D2D; /* พื้นหลังสีเทาเข้มเหมือนในรูป */
+            background-color: #2D2D2D;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,23 +16,18 @@
             align-items: center;
             min-height: 100vh;
         }
-
-        /* กรอบสีขาว (Card) */
         .edit-wrapper {
             width: 100%;
             max-width: 700px;
             padding: 20px;
             box-sizing: border-box;
         }
-
         .edit-card {
             background-color: #FFFFFF;
             padding: 40px 50px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-
-        /* หัวข้อหลัก */
         .edit-title {
             font-size: 24px;
             font-weight: 600;
@@ -42,12 +35,7 @@
             margin-top: 0;
             margin-bottom: 30px;
         }
-
-        /* จัดกลุ่มฟอร์ม */
-        .form-group {
-            margin-bottom: 25px;
-        }
-
+        .form-group { margin-bottom: 25px; }
         .form-label {
             display: block;
             font-size: 16px;
@@ -55,31 +43,23 @@
             color: #000000;
             margin-bottom: 10px;
         }
-
-        /* ช่องกรอกข้อมูลทั่วไป */
         .form-control {
             width: 100%;
             padding: 12px 20px;
             font-family: 'Prompt', sans-serif;
             font-size: 16px;
             border: 1px solid #CCCCCC;
-            border-radius: 30px; /* ทำให้ขอบโค้งมนแบบแคปซูล */
+            border-radius: 30px;
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.3s;
         }
-
-        .form-control:focus {
-            border-color: #F59E0B;
-        }
-
+        .form-control:focus { border-color: #F59E0B; }
         .form-control:disabled {
             background-color: #FFFFFF;
             color: #666666;
             cursor: not-allowed;
         }
-
-        /* ช่องสถานะ */
         .status-select {
             appearance: none;
             -webkit-appearance: none;
@@ -87,30 +67,19 @@
             width: fit-content;
             min-width: 200px;
         }
-
-        /* ช่องหมายเหตุ */
         .textarea-note {
             resize: vertical;
             min-height: 120px;
-            border-radius: 20px; /* ลดความโค้งลงนิดหน่อยให้เหมาะกับกล่องข้อความ */
+            border-radius: 20px;
             padding: 15px 20px;
         }
-
-        /* เปลี่ยนสี placeholder ของหมายเหตุเป็นสีฟ้าตามรูป */
-        .textarea-note::placeholder {
-            color: #60A5FA; 
-            opacity: 1;
-        }
-
-        /* ส่วนปุ่มกดด้านล่าง */
+        .textarea-note::placeholder { color: #60A5FA; opacity: 1; }
         .edit-actions {
             display: flex;
-            justify-content: flex-end; /* ดันปุ่มไปทางขวา */
-            gap: 15px; /* ระยะห่างระหว่างปุ่ม */
+            justify-content: flex-end;
+            gap: 15px;
             margin-top: 40px;
         }
-
-        /* ปุ่มยกเลิก */
         .btn-cancel {
             font-family: 'Prompt', sans-serif;
             font-size: 16px;
@@ -123,28 +92,20 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        .btn-cancel:hover {
-            background-color: #F3F4F6;
-        }
-
-        /* ปุ่มบันทึก */
+        .btn-cancel:hover { background-color: #F3F4F6; }
         .btn-save {
             font-family: 'Prompt', sans-serif;
             font-size: 16px;
             font-weight: 500;
             color: #FFFFFF;
-            background-color: #F59E0B; /* สีส้มอมเหลืองตามรูป */
+            background-color: #F59E0B;
             border: none;
             border-radius: 10px;
             padding: 10px 40px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
-        .btn-save:hover {
-            background-color: #D97706;
-        }
+        .btn-save:hover { background-color: #D97706; }
     </style>
 </head>
 <body class="edit-page">
@@ -153,13 +114,11 @@
         <div class="edit-card">
             <h2 class="edit-title">อัพเดตสถานะ</h2>
             
-            <form method="POST" action="{{ url_for('edit_report', id=id) }}">
-                
+            <form method="POST" action="{{ url_for('edit_report.edit_report', id=id) }}">
                 <div class="form-group">
                     <label class="form-label">หัวข้อปัญหา</label>
                     <input type="text" value="{{ report[0] }}" disabled class="form-control">
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">สถานะ</label>
                     <select name="status" class="form-control status-select" required>
@@ -168,17 +127,14 @@
                         <option value="รอดำเนินการ" {% if report[1] == 'รอดำเนินการ' %}selected{% endif %}>🟠 รอดำเนินการ</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">หมายเหตุ</label>
                     <textarea class="form-control textarea-note" placeholder="หมายเหตุจากเจ้าหน้าที่"></textarea>
                 </div>
-
                 <div class="edit-actions">
-                    <button type="button" onclick="window.location.href='/dashboard'" class="btn-cancel">ยกเลิก</button>
+                    <button type="button" onclick="window.location.href='{{ url_for('dashboard.dashboard') }}'" class="btn-cancel">ยกเลิก</button>
                     <button type="submit" class="btn-save">บันทึก</button>
                 </div>
-
             </form>
         </div>
     </div>

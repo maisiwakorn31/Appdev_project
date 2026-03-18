@@ -1,7 +1,6 @@
 /* =====================
 GLOBAL
 ===================== */
-
 * {
     margin: 0;
     padding: 0;
@@ -17,316 +16,430 @@ body {
 /* =====================
 NAVBAR
 ===================== */
-
 .navbar {
     background: white;
-    padding: 15px 5%;
+    padding: 0 5%;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 64px;
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
 }
 
 .brand {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 700;
     color: #ff9800;
+    min-width: 120px;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 20px;
+    gap: 28px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #444;
     font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: #ff9800; /* เพิ่มสีตอน hover ให้ด้วยครับ */
+.nav-links a:hover { color: #ff9800; }
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 120px;
+    justify-content: flex-end;
+}
+
+.user-icon {
+    font-size: 32px;
+    color: #555;
+    line-height: 1;
 }
 
 .btn-login {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 8px 18px;
     background: #3b82f6;
     color: white;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .btn-logout {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 8px 18px;
     background: #ef4444;
     color: white;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* =====================
-HERO SECTION
+HERO
 ===================== */
-
 .hero {
     background: linear-gradient(135deg, #ff9800, #ffc107);
-    padding: 70px 5%;
+    padding: 60px 5%;
     text-align: center;
     color: white;
 }
 
+.hero-content { max-width: 700px; margin: 0 auto; }
+
 .badge-top {
+    display: inline-block;
     background: rgba(255,255,255,0.3);
-    padding: 6px 16px;
+    padding: 6px 18px;
     border-radius: 20px;
     font-size: 14px;
+    margin-bottom: 18px;
 }
 
 .hero h1 {
-    font-size: 38px;
-    margin: 20px 0;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 14px;
+}
+
+.hero p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 28px;
 }
 
 .hero-actions {
-    margin-top: 25px;
     display: flex;
     justify-content: center;
-    gap: 15px;
-}
-
-.hero-actions button {
-    padding: 12px 30px;
-    border-radius: 25px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
+    gap: 14px;
+    flex-wrap: wrap;
 }
 
 .btn-primary {
+    padding: 12px 30px;
     background: white;
     color: #ff9800;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Sarabun', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
+
+.btn-primary:hover { opacity: 0.9; }
 
 .btn-secondary {
-    background: white;
-    color: #444;
+    padding: 12px 30px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Sarabun', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/* =====================
-STATS SECTION
-===================== */
+.btn-secondary:hover { background: rgba(255,255,255,0.15); }
 
+/* =====================
+STATS
+===================== */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: -40px auto 40px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: -30px auto 30px;
     padding: 0 20px;
+    position: relative;
+    z-index: 10;
 }
 
 .stat-card {
-    padding: 20px;
-    border-radius: 15px;
+    padding: 22px 20px;
+    border-radius: 16px;
     color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-.orange {
-    background: #ff7043;
-}
-.yellow {
-    background: #ffb300;
-}
-.blue {
-    background: #42a5f5;
-}
-.green {
-    background: #66bb6a;
+.stat-card i {
+    font-size: 26px;
+    margin-bottom: 8px;
+    display: block;
 }
 
 .stat-num {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
 }
 
-/* =====================
-CONTENT
-===================== */
+.stat-label {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-top: 6px;
+}
 
+.orange { background: #ff7043; }
+.yellow { background: #ffb300; }
+.blue   { background: #42a5f5; }
+.green  { background: #66bb6a; }
+
+/* =====================
+CONTENT SECTION
+===================== */
 .content-section {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px 20px 50px;
+}
+
+.content-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 18px;
 }
 
 /* =====================
-ISSUE CARDS (ใช้กับหลายหน้า)
+HOME ISSUE GRID
 ===================== */
+.home-issue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+}
 
+.home-issue-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.home-issue-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* =====================
+CARD TOP
+===================== */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* =====================
+STATUS BADGE
+===================== */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-badge .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-badge.green       { background: #e8f5e9; color: #2e7d32; }
+.status-badge.green .dot  { background: #4CAF50; }
+.status-badge.blue        { background: #e3f2fd; color: #1565c0; }
+.status-badge.blue .dot   { background: #2196F3; }
+.status-badge.orange      { background: #fff3e0; color: #ef6c00; }
+.status-badge.orange .dot { background: #FF9800; }
+
+/* =====================
+TRASH BUTTON
+===================== */
+.btn-trash {
+    background: #fff5f5;
+    border: none;
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+.btn-trash:hover { background: #fecaca; }
+
+/* =====================
+CARD BODY (แนวนอน)
+===================== */
+.card-body {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.card-img {
+    width: 110px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.card-img-placeholder {
+    width: 110px;
+    height: 85px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.card-label {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-desc {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-img-full {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.card-divider {
+    border: none;
+    border-top: 1px solid #f0f0f0;
+    margin: 8px 0;
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* =====================
+MY REPORTS
+===================== */
 .issue-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
     margin-top: 20px;
 }
 
 .issue-card {
     background: white;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: 0.2s;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transition: transform 0.2s;
 }
 
-.issue-card:hover {
-    transform: translateY(-4px);
-}
-
-.issue-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.issue-card h3 {
-    margin-bottom: 6px;
-    font-size: 18px;
-}
-
-.issue-card p {
-    margin: 4px 0;
-    font-size: 14px;
-    color: #444;
-}
-
-.status {
-    font-weight: bold;
-}
-
-.date {
-    font-size: 13px;
-    color: gray;
-}
+.issue-card:hover { transform: translateY(-3px); }
 
 /* =====================
-HOME ISSUE CARDS
+CONTAINER / PAGE TITLE
 ===================== */
-
-.home-issue-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
-}
-
-.home-issue-card {
-    background: white;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.home-issue-card img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-/* 🌟 โซนใหม่: สไตล์ของป้ายสถานะ (Status Badge) ที่เพิ่มจุดสี 🌟 */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.2s ease-in-out;
-}
-
-.status-badge .dot {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.status-badge.green {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-}
-.status-badge.green .dot {
-    background-color: #4CAF50;
-}
-
-.status-badge.blue {
-    background-color: #e3f2fd;
-    color: #1565c0;
-}
-.status-badge.blue .dot {
-    background-color: #2196F3;
-}
-
-.status-badge.orange {
-    background-color: #fff3e0;
-    color: #ef6c00;
-}
-.status-badge.orange .dot {
-    background-color: #FF9800;
-}
-
-.status-badge:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-}
-
-/* =====================
-CONTAINER
-===================== */
-
 .container {
     width: 90%;
     max-width: 1000px;
-    margin: auto;
-    margin-top: 40px;
+    margin: 40px auto;
 }
 
 .page-title {
-    font-size: 26px;
+    font-size: 24px;
+    font-weight: 700;
     margin-bottom: 20px;
+    color: #222;
 }
 
 /* =====================
-DASHBOARD
+DASHBOARD TABLE
 ===================== */
-
 .dashboard-card {
     background: white;
     padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    overflow-x: auto;
 }
 
 .report-table {
@@ -336,60 +449,89 @@ DASHBOARD
 
 .report-table th,
 .report-table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
     text-align: left;
+    font-size: 14px;
 }
 
-/* สไตล์สถานะในตาราง Dashboard เดิม */
-.status.รอดำเนินการ {
-    background: #ffeaa7;
-    padding: 5px 10px;
-    border-radius: 15px;
+.report-table th {
+    font-weight: 700;
+    color: #555;
+    background: #fafafa;
 }
 
-.status.กำลังดำเนินการ {
-    background: #74b9ff;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
-}
-
-.status.แก้ไขแล้ว {
-    background: #55efc4;
-    padding: 5px 10px;
-    border-radius: 15px;
-}
+.status { font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+.status.รอดำเนินการ    { background: #fff3e0; color: #ef6c00; }
+.status.กำลังดำเนินการ { background: #e3f2fd; color: #1565c0; }
+.status.แก้ไขแล้ว     { background: #e8f5e9; color: #2e7d32; }
 
 /* =====================
-BUTTONS
+BUTTONS (Dashboard)
 ===================== */
-
 .btn-edit {
+    display: inline-block;
     background: #3498db;
     color: white;
-    padding: 6px 10px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
+    margin-right: 6px;
+    transition: background 0.2s;
 }
 
+.btn-edit:hover { background: #2980b9; }
+
 .btn-delete {
+    display: inline-block;
     background: #e74c3c;
     color: white;
-    padding: 6px 10px;
-    border-radius: 5px;
+    padding: 6px 12px;
+    border-radius: 6px;
     text-decoration: none;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover { background: #c0392b; }
+
+/* =====================
+FORM
+===================== */
+.form-card {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px 14px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-family: 'Sarabun', sans-serif;
     font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #ff9800;
 }
 
 .btn-save {
     background: #27ae60;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
 }
 
 .btn-cancel {
@@ -398,53 +540,15 @@ BUTTONS
     color: #555;
 }
 
-/* =====================
-FORM
-===================== */
-
-.form-card {
-    background: white;
-    padding: 25px;
+/* ── CATEGORY EMOJI (มุมขวาบนการ์ด) ── */
+.cat-emoji {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    background: #F9FAFB;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* แก้ scroll ติด */
-html, body {
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-/* แก้ stats ทับ hero */
-.stats-container {
-    margin-top: 30px;
-    margin-bottom: 40px;
-}
-
-/* การ์ดสูงเท่ากัน */
-.home-issue-grid {
-    align-items: start;
-}
-
-.home-issue-card {
     display: flex;
-    flex-direction: column;
-}
-
-/* รูปในการ์ด */
-.card-img-full {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }

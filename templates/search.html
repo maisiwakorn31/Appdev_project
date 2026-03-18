@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหาปัญหา</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my-reports-style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="my-reports-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">แจ้งปัญหา</div>
+            <ul class="nav-links">
+                <li><a href="/">หน้าหลัก</a></li>
+                <li><a href="/report">แจ้งปัญหา</a></li>
+                <li><a href="/my_reports">ปัญหาของคุณ</a></li>
+                <li><a href="/search">ค้นหา</a></li>
+                {% if session.get("role") == "admin" %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">แผงควบคุม</a></li>
+                {% endif %}
+            </ul>
+            <div class="auth-buttons">
+                {% if session.get("user_id") %}
+                    <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                    <a href="/logout" class="btn-logout">Logout</a>
+                {% else %}
+                    <a href="/login" class="btn-login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="my-container">
+
+        <!-- PAGE HEADER -->
+        <div class="my-header" style="margin-bottom: 20px;">
+            <div>
+                <h2>ค้นหาปัญหา</h2>
+                <p>ค้นหาและติดตามสถานะปัญหาทั้งหมด</p>
+            </div>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="search-bar" style="margin-bottom: 28px;">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" placeholder="" oninput="filterCards()">
+        </div>
+
+        <!-- CARDS GRID -->
+        <div class="my-issue-grid" id="cardGrid">
+            {% for r in reports %}
+            <div class="my-issue-card" data-title="{{ r[1] }}" data-desc="{{ r[2] }}">
+
+                <!-- Status + Trash -->
+                <div class="card-top">
+                    {% if r[4] == 'แก้ไขแล้ว' %}
+                        <span class="status-badge green"><span class="dot"></span>แก้ไขแล้ว</span>
+                    {% elif r[4] == 'กำลังดำเนินการ' %}
+                        <span class="status-badge blue"><span class="dot"></span>กำลังดำเนินการ</span>
+                    {% else %}
+                        <span class="status-badge orange"><span class="dot"></span>รอดำเนินการ</span>
+                    {% endif %}
+                                        {% set emoji_map = {"ถนน":"🚧","น้ำ":"💧","ไฟฟ้า":"⚡","ความปลอดภัย":"🛡️","น้ำท่วม":"🌧️","การจราจร":"🚦","ต้นไม้":"🌲","มลพิษ":"💨","ขยะ":"🗑️","อื่นๆ":"❓"} %}
+                    <span class="cat-emoji">{{ emoji_map.get(r[5], "❓") }}</span>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body">
+                    {% if r[3] %}
+                    <img class="card-img" src="{{ url_for('static', filename='uploads/' ~ r[3]) }}" alt="รูปปัญหา"/>
+                    {% else %}
+                    <div class="card-img card-img-placeholder"><i class="fa-solid fa-image"></i></div>
+                    {% endif %}
+
+                    <div class="card-info">
+                        <div class="card-label">ประเภท</div>
+                        <div class="card-title">{{ r[1] }}</div>
+                        <div class="card-desc">{{ r[2] }}</div>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <script>
+        function filterCards() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.my-issue-card').forEach(card => {
+                const title = card.dataset.title.toLowerCase();
+                const desc  = card.dataset.desc.toLowerCase();
+                card.style.display = (title.includes(q) || desc.includes(q)) ? '' : 'none';
+            });
+        }
+    </script>
+
+</body>
+</html>
