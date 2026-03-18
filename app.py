@@ -32,6 +32,16 @@ app.register_blueprint(delete_report_bp)
 app.register_blueprint(search_bp)
 # ─────────────────────────────────────────────────────────
 
+# ── Context Processor ────────────────────────────────────
+# ส่ง is_admin_user ไปให้ทุก HTML อัตโนมัติ ไม่ต้องส่งทีละ route
+@app.context_processor
+def inject_globals():
+    return {
+        "is_admin_user": is_admin(),
+        "is_logged_in": "user_id" in session,
+    }
+# ─────────────────────────────────────────────────────────
+
 
 @app.route('/')
 def home():
@@ -57,8 +67,6 @@ def home():
         pending=pending,
         processing=processing,
         done=done,
-        is_logged_in=("user_id" in session),
-        is_admin_user=is_admin(),  # ← ดึงจาก DB real-time ทุกครั้ง
     )
 
 
