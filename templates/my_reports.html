@@ -1,78 +1,73 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>ปัญหาของคุณ</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <title>ปัญหาของคุณ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-
+ 
 <nav class="navbar">
-<div class="nav-container">
-
-<div class="brand">แจ้งปัญหา</div>
-
-<ul class="nav-links">
-<li><a href="/">หน้าหลัก</a></li>
-<li><a href="/report">แจ้งปัญหา</a></li>
-<li><a href="/my_reports">ปัญหาของคุณ</a></li>
-</ul>
-
-<div class="auth-buttons">
-<a href="/logout" class="btn-logout">Logout</a>
-</div>
-
-</div>
+    <div class="nav-container">
+        <div class="brand">แจ้งปัญหา</div>
+        <ul class="nav-links">
+            <li><a href="/">หน้าหลัก</a></li>
+            <li><a href="/report">แจ้งปัญหา</a></li>
+            <li><a href="/my_reports">ปัญหาของคุณ</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="/logout" class="btn-logout">Logout</a>
+        </div>
+    </div>
 </nav>
-
-
+ 
 <main class="content-section">
-
-<h2>ปัญหาที่คุณแจ้ง</h2>
-
-<div class="issue-grid">
-
-{% for r in reports %}
-
-<div class="issue-card">
-
-{% if r[2] %}
-<img src="{{ url_for('static', filename='uploads/' + r[2]) }}">
-{% endif %}
-
-<h3>{{ r[0] }}</h3>
-
-<p>{{ r[1] }}</p>
-
-<p>
-<i class="fa-solid fa-location-dot"></i>
-{{ r[3] }}
-</p>
-
-<p>
-<i class="fa-solid fa-user"></i>
-{{ r[4] }}
-</p>
-
-<p class="status">
-สถานะ: {{ r[5] }}
-</p>
-
-<p class="date">
-<i class="fa-regular fa-clock"></i>
-{{ r[6][:10] }}
-</p>
-
-</div>
-
-{% endfor %}
-
-</div>
-
+ 
+    <h2 class="page-title">ปัญหาที่คุณแจ้ง</h2>
+ 
+    <div class="issue-grid">
+ 
+        {% for r in reports %}
+        <div class="issue-card">
+ 
+            <!-- STATUS BADGE -->
+            <div class="card-top">
+                {% if r[5] == 'แก้ไขแล้ว' %}
+                    <span class="status-badge green"><span class="dot"></span>แก้ไขแล้ว</span>
+                {% elif r[5] == 'กำลังดำเนินการ' %}
+                    <span class="status-badge blue"><span class="dot"></span>กำลังดำเนินการ</span>
+                {% else %}
+                    <span class="status-badge orange"><span class="dot"></span>รอดำเนินการ</span>
+                {% endif %}
+            </div>
+ 
+            <!-- รูปภาพ -->
+            {% if r[2] %}
+            <img src="{{ url_for('static', filename='uploads/' + r[2]) }}" class="card-img-full"/>
+            {% endif %}
+ 
+            <!-- ข้อมูล -->
+            <div class="card-info">
+                <div class="card-title">{{ r[0] }}</div>
+                <div class="card-desc">{{ r[1] }}</div>
+                <hr class="card-divider"/>
+                <div class="card-meta">
+                    {% if r[3] %}
+                    <span><i class="fa-solid fa-location-dot"></i> {{ r[3] }}</span>
+                    {% endif %}
+                    <span><i class="fa-solid fa-user"></i> {{ r[4] }}</span>
+                    <span><i class="fa-regular fa-clock"></i> {{ r[6][:10] }}</span>
+                </div>
+            </div>
+ 
+        </div>
+        {% endfor %}
+ 
+    </div>
+ 
 </main>
-
+ 
 </body>
 </html>
