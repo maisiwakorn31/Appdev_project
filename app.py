@@ -1,11 +1,10 @@
-from flask import Flask, render_template, session, redirect, url_for,request
+from flask import Flask, render_template, session, redirect, url_for, request
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "secret123"
-
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -27,26 +26,50 @@ def init_db():
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS reports (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER,
-    title TEXT,
-    detail TEXT,
-    image TEXT,
-    location TEXT,
-    reporter_name TEXT,
-    phone TEXT,
-    status TEXT DEFAULT 'รอดำเนินการ',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        title TEXT,
+        detail TEXT,
+        image TEXT,
+        location TEXT,
+        reporter_name TEXT,
+        phone TEXT,
+        status TEXT DEFAULT 'รอดำเนินการ',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
     conn.commit()
     conn.close()
 
+# 🌟 เพิ่มฟังก์ชันนี้เพื่อเช็กสิทธิ์แบบ Real-time จาก Database 🌟
+def is_admin():
+    if "user_id" not in session:
+        return False
+    
+    conn = sqlite3.connect("users.db")
+    cur = conn.cursor()
+    cur.execute("SELECT role FROM users WHERE id=?", (session["user_id"],))
+    user_data = cur.fetchone()
+    conn.close()
+    
+    # ถ้ามีข้อมูลและสิทธิ์เป็น admin ให้ผ่าน (True)
+    if user_data and user_data[0] == 'admin':
+        return True
+    return False
+
+# ----------------------------------------------------
+
+@app.route('/admin_dashboard')
+def admin_dashboard():
+    # ใช้ฟังก์ชันเช็กสิทธิ์แบบ Real-time แทน
+    if not is_admin():
+        return "คุณไม่มีสิทธิ์เข้าหน้านี้"
+    
+    return render_template('admin.html')
 
 @app.route('/')
 def home():
-
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
 
@@ -87,12 +110,9 @@ def home():
     )
 
 
-
 @app.route('/login', methods=["GET","POST"])
 def login():
-
     if request.method == "POST":
-
         phone = request.form["phone"]
         password = request.form["password"]
 
@@ -109,7 +129,8 @@ def login():
 
         if user:
             session["user_id"] = user[0]
-            session["role"] = user[4]
+            # ไม่จำเป็นต้องเก็บ role ใน session แล้วเพราะเราเช็กสด แต่จะเก็บไว้เผื่อใช้หน้าอื่นก็ได้
+            session["role"] = user[4] 
             return redirect("/")
 
         return render_template("auth.html", error="เบอร์โทรหรือรหัสผ่านไม่ถูกต้อง")
@@ -118,9 +139,7 @@ def login():
 
 @app.route("/register", methods=["GET","POST"])
 def register():
-
     if request.method == "POST":
-
         fullname = request.form["fullname"]
         phone = request.form["phone"]
         password = request.form["password"]
@@ -146,13 +165,10 @@ def register():
 
 @app.route("/report", methods=["GET","POST"])
 def report():
-
     if "user_id" not in session:
         return redirect("/login")
 
-    
     if request.method == "POST":
-
         title = request.form["title"]
         detail = request.form["detail"]
         location = request.form["location"]
@@ -203,7 +219,6 @@ def report():
 
 @app.route("/my_reports")
 def my_reports():
-
     if "user_id" not in session:
         return redirect("/login")
 
@@ -226,8 +241,8 @@ def my_reports():
 # ----------------- โซนของ Admin -----------------
 @app.route("/dashboard")
 def dashboard():
-    # เช็กว่าเป็น admin หรือไม่
-    if session.get("role") != "admin":
+    # 🌟 เปลี่ยนมาใช้ฟังก์ชัน is_admin() เพื่อเช็กสดๆ จาก DB 🌟
+    if not is_admin():
         return redirect("/")
         
     conn = sqlite3.connect("users.db")
@@ -264,11 +279,13 @@ def dashboard():
 
     return render_template("dashboard.html", reports=reports, stats=stats)
 
-@app.route("/delete_report/<int:id>")
+
+# (หมายเหตุ: มีโค้ดซ้ำ @app.route("/delete_report/<int:id>") 2 บรรทัดติดกัน ผมลบออกให้บรรทัดนึงนะครับ)
 @app.route("/delete_report/<int:id>")
 def delete_report(id):
-    if "user_id" not in session:
-        return redirect("/login")
+    # ป้องกันคนที่ไม่ใช่ Admin แอบพิมพ์ URL เพื่อลบข้อมูล
+    if not is_admin():
+        return redirect("/")
 
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
@@ -282,8 +299,9 @@ def delete_report(id):
 
 @app.route("/edit_report/<int:id>", methods=["GET","POST"])
 def edit_report(id):
-    if "user_id" not in session:
-        return redirect("/login")
+    # ป้องกันคนที่ไม่ใช่ Admin แอบพิมพ์ URL เพื่อแก้สถานะ
+    if not is_admin():
+        return redirect("/")
 
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
@@ -314,7 +332,6 @@ def edit_report(id):
 def logout():
     session.clear() 
     return redirect(url_for("home")) 
-
 
 if __name__ == "__main__":
     init_db()
