@@ -225,22 +225,25 @@ def my_reports():
 
 @app.route("/dashboard")
 def dashboard():
-
+    # 1. เช็คว่าล็อกอินหรือยัง
     if "user_id" not in session:
         return redirect("/login")
 
+    # 2. เช็คว่าสิทธิ์เป็น admin หรือไม่ (ถ้าไม่ใช่ เด้งกลับหน้าแรก)
+    if session.get("role") != "admin":
+        return redirect("/")
+
+    # 3. สำหรับ Admin ควรจะเห็นปัญหาของ "ทุกคน" (ลบเงื่อนไข WHERE user_id=? ออก)
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
 
     cur.execute("""
     SELECT id,title,status,created_at
     FROM reports
-    WHERE user_id=?
     ORDER BY created_at DESC
-    """,(session["user_id"],))
+    """)
 
     reports = cur.fetchall()
-
     conn.close()
 
     return render_template("dashboard.html", reports=reports)
