@@ -223,53 +223,65 @@ def my_reports():
 
     return render_template("my_reports.html", reports=reports)
 
+# ----------------- โซนของ Admin -----------------
 @app.route("/dashboard")
 def dashboard():
-    # 1. เช็คว่าล็อกอินหรือยัง
-    if "user_id" not in session:
-        return redirect("/login")
-
-    # 2. เช็คว่าสิทธิ์เป็น admin หรือไม่ (ถ้าไม่ใช่ เด้งกลับหน้าแรก)
+    # เช็กว่าเป็น admin หรือไม่
     if session.get("role") != "admin":
         return redirect("/")
-
-    # 3. สำหรับ Admin ควรจะเห็นปัญหาของ "ทุกคน" (ลบเงื่อนไข WHERE user_id=? ออก)
+        
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
 
-    cur.execute("""
-    SELECT id,title,status,created_at
-    FROM reports
-    ORDER BY created_at DESC
-    """)
+    # --- ดึงข้อมูลสรุปสำหรับการ์ดด้านบน ---
+    cur.execute("SELECT COUNT(*) FROM reports")
+    total = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(*) FROM reports WHERE status='รอดำเนินการ'")
+    pending = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(*) FROM reports WHERE status='กำลังดำเนินการ'")
+    processing = cur.fetchone()[0]
+    cur.execute("SELECT COUNT(*) FROM reports WHERE status='แก้ไขแล้ว'")
+    done = cur.fetchone()[0]
 
+    # --- ดึงข้อมูลรายงานทั้งหมดสำหรับตาราง ---
+    cur.execute("""
+        SELECT r.id, r.title, r.status, r.created_at, u.fullname
+        FROM reports r
+        JOIN users u ON r.user_id = u.id
+        ORDER BY r.created_at DESC
+    """)
     reports = cur.fetchall()
+    
     conn.close()
 
-    return render_template("dashboard.html", reports=reports)
+    # --- เตรียมข้อมูลสรุปสำหรับการ์ด ---
+    stats = {
+        'total': total,
+        'pending': pending,
+        'processing': processing,
+        'done': done
+    }
+
+    return render_template("dashboard.html", reports=reports, stats=stats)
 
 @app.route("/delete_report/<int:id>")
+@app.route("/delete_report/<int:id>")
 def delete_report(id):
-
     if "user_id" not in session:
         return redirect("/login")
 
     conn = sqlite3.connect("users.db")
     cur = conn.cursor()
 
-    cur.execute("""
-    DELETE FROM reports
-    WHERE id=? AND user_id=?
-    """,(id,session["user_id"]))
+    # ลบแค่ id อย่างเดียว ไม่ต้องเช็ก user_id แล้วเพื่อให้ Admin ลบได้ทุกคน
+    cur.execute("DELETE FROM reports WHERE id=?", (id,))
 
     conn.commit()
     conn.close()
-
     return redirect("/dashboard")
 
 @app.route("/edit_report/<int:id>", methods=["GET","POST"])
 def edit_report(id):
-
     if "user_id" not in session:
         return redirect("/login")
 
@@ -277,29 +289,22 @@ def edit_report(id):
     cur = conn.cursor()
 
     if request.method == "POST":
+        status = request.form["status"] # รับค่าสถานะมาจากฟอร์ม
 
-        title = request.form["title"]
-        detail = request.form["detail"]
-
+        # อัปเดตเฉพาะสถานะ
         cur.execute("""
         UPDATE reports
-        SET title=?, detail=?
-        WHERE id=? AND user_id=?
-        """,(title,detail,id,session["user_id"]))
+        SET status=?
+        WHERE id=?
+        """, (status, id))
 
         conn.commit()
         conn.close()
-
         return redirect("/dashboard")
 
-    cur.execute("""
-    SELECT title,detail
-    FROM reports
-    WHERE id=? AND user_id=?
-    """,(id,session["user_id"]))
-
+    # ดึงข้อมูลมาโชว์ในฟอร์ม
+    cur.execute("SELECT title, status FROM reports WHERE id=?", (id,))
     report = cur.fetchone()
-
     conn.close()
 
     return render_template("edit_report.html", report=report, id=id)
