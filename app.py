@@ -81,7 +81,6 @@ def home():
         SELECT id,title,detail,image,status
         FROM reports
         ORDER BY created_at DESC
-        LIMIT 3
     """)
     reports = cur.fetchall()
     conn.close()
