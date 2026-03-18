@@ -2,363 +2,418 @@
 GLOBAL
 ===================== */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Sarabun',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
 }
 
-body{
-background:#f5f7fa;
-color:#333;
+body {
+    background: #f5f7fa;
+    color: #333;
 }
 
 /* =====================
 NAVBAR
 ===================== */
 
-.navbar{
-background:white;
-padding:15px 5%;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-position:sticky;
-top:0;
-z-index:1000;
+.navbar {
+    background: white;
+    padding: 15px 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.nav-container{
-display:flex;
-justify-content:space-between;
-align-items:center;
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.brand{
-font-size:22px;
-font-weight:bold;
-color:#ff9800;
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ff9800;
 }
 
-.nav-links{
-display:flex;
-list-style:none;
-gap:20px;
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
 }
 
-.nav-links a{
-text-decoration:none;
-color:#444;
-font-weight:500;
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
 }
 
-.nav-links a:hover
-
-.btn-login{
-display:inline-block;
-padding:8px 16px;
-background:#3b82f6;
-color:white;
-border-radius:6px;
-text-decoration:none;
+.nav-links a:hover {
+    color: #ff9800; /* เพิ่มสีตอน hover ให้ด้วยครับ */
 }
 
-.btn-logout{
-display:inline-block;
-padding:8px 16px;
-background:#ef4444;
-color:white;
-border-radius:6px;
-text-decoration:none;
+.btn-login {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-logout {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #ef4444;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
 }
 
 /* =====================
 HERO SECTION
 ===================== */
 
-.hero{
-background:linear-gradient(135deg,#ff9800,#ffc107);
-padding:70px 5%;
-text-align:center;
-color:white;
+.hero {
+    background: linear-gradient(135deg, #ff9800, #ffc107);
+    padding: 70px 5%;
+    text-align: center;
+    color: white;
 }
 
-.badge-top{
-background:rgba(255,255,255,0.3);
-padding:6px 16px;
-border-radius:20px;
-font-size:14px;
+.badge-top {
+    background: rgba(255,255,255,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
 }
 
-.hero h1{
-font-size:38px;
-margin:20px 0;
+.hero h1 {
+    font-size: 38px;
+    margin: 20px 0;
 }
 
-.hero-actions{
-margin-top:25px;
-display:flex;
-justify-content:center;
-gap:15px;
+.hero-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
-.hero-actions button{
-padding:12px 30px;
-border-radius:25px;
-border:none;
-font-weight:bold;
-cursor:pointer;
+.hero-actions button {
+    padding: 12px 30px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.btn-primary{
-background:white;
-color:#ff9800;
+.btn-primary {
+    background: white;
+    color: #ff9800;
 }
 
-.btn-secondary{
-background:white;
-color:#444;
+.btn-secondary {
+    background: white;
+    color: #444;
 }
 
 /* =====================
 STATS SECTION
 ===================== */
 
-.stats-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-max-width:1200px;
-margin:-40px auto 40px;
-padding:0 20px;
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: -40px auto 40px;
+    padding: 0 20px;
 }
 
-.stat-card{
-padding:20px;
-border-radius:15px;
-color:white;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+.stat-card {
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.orange{
-    background:#ff7043;
-    /*border-radius: 50px;*/
+.orange {
+    background: #ff7043;
 }
-.yellow{
-    background:#ffb300;
-    /*border-radius: 50px;*/
+.yellow {
+    background: #ffb300;
 }
-.blue{
-    background:#42a5f5;
-    /*border-radius: 50px;*/
+.blue {
+    background: #42a5f5;
 }
-.green{
-    background:#66bb6a;
-    /*border-radius: 50px;*/
+.green {
+    background: #66bb6a;
 }
 
-.stat-num{
-font-size:28px;
-font-weight:bold;
+.stat-num {
+    font-size: 28px;
+    font-weight: bold;
 }
 
 /* =====================
 CONTENT
 ===================== */
 
-.content-section{
-max-width:1200px;
-margin:auto;
-padding:20px;
+.content-section {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
 /* =====================
 ISSUE CARDS (ใช้กับหลายหน้า)
 ===================== */
 
-.issue-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-margin-top:20px;
+.issue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
 }
 
-.issue-card{
-background:white;
-border-radius:12px;
-padding:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-transition:0.2s;
+.issue-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
 }
 
-.issue-card:hover{
-transform:translateY(-4px);
+.issue-card:hover {
+    transform: translateY(-4px);
 }
 
-.issue-card img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:10px;
-margin-bottom:10px;
+.issue-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-.issue-card h3{
-margin-bottom:6px;
-font-size:18px;
+.issue-card h3 {
+    margin-bottom: 6px;
+    font-size: 18px;
 }
 
-.issue-card p{
-margin:4px 0;
-font-size:14px;
-color:#444;
+.issue-card p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #444;
 }
 
-.status{
-font-weight:bold;
+.status {
+    font-weight: bold;
 }
 
-.date{
-font-size:13px;
-color:gray;
+.date {
+    font-size: 13px;
+    color: gray;
 }
 
 /* =====================
 HOME ISSUE CARDS
 ===================== */
 
-.home-issue-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-margin-top:20px;
+.home-issue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
 }
 
-.home-issue-card{
-background:white;
-border-radius:12px;
-padding:18px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
+.home-issue-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.home-issue-card img{
-width:100%;
-height:170px;
-object-fit:cover;
-border-radius:8px;
-margin-bottom:10px;
+.home-issue-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* 🌟 โซนใหม่: สไตล์ของป้ายสถานะ (Status Badge) ที่เพิ่มจุดสี 🌟 */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.status-badge .dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-badge.green {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+.status-badge.green .dot {
+    background-color: #4CAF50;
+}
+
+.status-badge.blue {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+.status-badge.blue .dot {
+    background-color: #2196F3;
+}
+
+.status-badge.orange {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+.status-badge.orange .dot {
+    background-color: #FF9800;
+}
+
+.status-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
 /* =====================
 CONTAINER
 ===================== */
 
-.container{
-width:90%;
-max-width:1000px;
-margin:auto;
-margin-top:40px;
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 40px;
 }
 
-.page-title{
-font-size:26px;
-margin-bottom:20px;
+.page-title {
+    font-size: 26px;
+    margin-bottom: 20px;
 }
 
 /* =====================
 DASHBOARD
 ===================== */
 
-.dashboard-card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.dashboard-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.report-table{
-width:100%;
-border-collapse:collapse;
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .report-table th,
-.report-table td{
-padding:12px;
-border-bottom:1px solid #eee;
-text-align:left;
+.report-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
 }
 
-.status.รอดำเนินการ{
-background:#ffeaa7;
-padding:5px 10px;
-border-radius:15px;
+/* สไตล์สถานะในตาราง Dashboard เดิม */
+.status.รอดำเนินการ {
+    background: #ffeaa7;
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 
-.status.กำลังดำเนินการ{
-background:#74b9ff;
-color:white;
-padding:5px 10px;
-border-radius:15px;
+.status.กำลังดำเนินการ {
+    background: #74b9ff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 
-.status.แก้ไขแล้ว{
-background:#55efc4;
-padding:5px 10px;
-border-radius:15px;
+.status.แก้ไขแล้ว {
+    background: #55efc4;
+    padding: 5px 10px;
+    border-radius: 15px;
 }
 
 /* =====================
 BUTTONS
 ===================== */
 
-.btn-edit{
-background:#3498db;
-color:white;
-padding:6px 10px;
-border-radius:5px;
-text-decoration:none;
-font-size:14px;
+.btn-edit {
+    background: #3498db;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.btn-delete{
-background:#e74c3c;
-color:white;
-padding:6px 10px;
-border-radius:5px;
-text-decoration:none;
-font-size:14px;
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.btn-save{
-background:#27ae60;
-color:white;
-padding:10px 15px;
-border:none;
-border-radius:5px;
-cursor:pointer;
+.btn-save {
+    background: #27ae60;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.btn-cancel{
-margin-left:10px;
-text-decoration:none;
-color:#555;
+.btn-cancel {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #555;
 }
 
 /* =====================
 FORM
 ===================== */
 
-.form-card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-input,textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:15px;
-border-radius:5px;
-border:1px solid #ccc;
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
