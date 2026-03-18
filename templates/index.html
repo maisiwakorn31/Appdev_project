@@ -20,7 +20,7 @@
                 <li><a href="/report">แจ้งปัญหา</a></li>
                 <li><a href="/my_reports">ปัญหาของคุณ</a></li>
                 <li><a href="/search">ค้นหา</a></li>
-                {% if session.get("role") == "admin" %}
+                {% if is_admin_user %}
                 <li><a href="{{ url_for('dashboard.dashboard') }}">แผงควบคุม</a></li>
                 {% endif %}
             </ul>

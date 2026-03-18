@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, session
 from database import init_db, get_db
+from routes.helper import is_admin
 
 from routes.login         import login_bp
 from routes.register      import register_bp
@@ -57,6 +58,7 @@ def home():
         processing=processing,
         done=done,
         is_logged_in=("user_id" in session),
+        is_admin_user=is_admin(),  # ← ดึงจาก DB real-time ทุกครั้ง
     )
 
 
