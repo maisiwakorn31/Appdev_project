@@ -12,6 +12,8 @@ def register():
         password = request.form["password"]
         confirm  = request.form["confirm_password"]
 
+        if not phone.isdigit() or len(phone) != 10:
+            return render_template("auth.html", error="เบอร์โทรศัพท์ไม่ถูกต้อง")
         if password != confirm:
             return render_template("auth.html", error="รหัสผ่านไม่ตรงกัน")
 
