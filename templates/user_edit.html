@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขปัญหา</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/report-style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="report-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">แจ้งปัญหา</div>
+            <ul class="nav-links">
+                <li><a href="/">หน้าหลัก</a></li>
+                <li><a href="/report">แจ้งปัญหา</a></li>
+                <li><a href="/my_reports">ปัญหาของคุณ</a></li>
+                <li><a href="/search">ค้นหา</a></li>
+                {% if is_admin_user %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">แผงควบคุม</a></li>
+                {% endif %}
+            </ul>
+            <div class="auth-buttons">
+                {% if is_logged_in %}
+                    <div class="user-icon"><i class="fa-solid fa-circle-user"></i></div>
+                    <a href="/logout" class="btn-logout">Logout</a>
+                {% else %}
+                    <a href="/login" class="btn-login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="report-header">
+        <h2>แก้ไขปัญหา</h2>
+        <p>แก้ไขรายละเอียดเรื่องที่แจ้งไว้</p>
+    </div>
+
+    <!-- FORM -->
+    <div class="report-container">
+        <div class="report-card">
+            <form action="{{ url_for('user_edit.user_edit', id=id) }}" method="POST" enctype="multipart/form-data">
+
+                <!-- ประเภทปัญหา -->
+                <div class="rform-group">
+                    <label class="rform-label">ประเภทปัญหา</label>
+                    <div class="category-grid">
+                        {% set cats = [("ถนน","🚧"),("น้ำ","💧"),("ไฟฟ้า","⚡"),("ความปลอดภัย","🛡️"),("น้ำท่วม","🌧️"),("การจราจร","🚦"),("ต้นไม้","🌲"),("มลพิษ","💨"),("ขยะ","🗑️"),("อื่นๆ","❓")] %}
+                        {% for val, emoji in cats %}
+                        <button type="button" class="cat-btn {% if report['category'] == val %}active{% endif %}"
+                                data-value="{{ val }}" onclick="selectCategory(this)">
+                            <span>{{ emoji }}</span>
+                        </button>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" name="category" id="category-input" value="{{ report['category'] }}">
+                </div>
+
+                <!-- หัวข้อ -->
+                <div class="rform-group">
+                    <label class="rform-label">หัวข้อปัญหา</label>
+                    <input type="text" name="title" class="rform-input" value="{{ report['title'] }}" required>
+                </div>
+
+                <!-- รายละเอียด -->
+                <div class="rform-group">
+                    <label class="rform-label">รายละเอียด</label>
+                    <textarea name="detail" class="rform-input" rows="3" style="border-radius:10px; resize:vertical;">{{ report['detail'] }}</textarea>
+                </div>
+
+                <!-- รูปภาพ -->
+                <div class="rform-group">
+                    <label class="rform-label">รูปภาพประกอบ</label>
+                    {% if report['image'] %}
+                    <div style="margin-bottom:10px;">
+                        <img src="{{ url_for('static', filename='uploads/' ~ report['image']) }}"
+                             style="width:120px; height:90px; object-fit:cover; border-radius:10px;">
+                        <span style="font-size:13px; color:#aaa; margin-left:8px;">รูปปัจจุบัน</span>
+                    </div>
+                    {% endif %}
+                    <label for="file-input" class="rform-input file-input-label">
+                        <span id="file-name">เลือกรูปใหม่ (ถ้าต้องการเปลี่ยน)</span>
+                        <i class="fa-solid fa-camera" style="color:#aaa;"></i>
+                    </label>
+                    <input type="file" name="image" id="file-input" accept="image/*" style="display:none"
+                           onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'เลือกรูปใหม่'">
+                </div>
+
+                <!-- สถานที่ -->
+                <div class="rform-group">
+                    <label class="rform-label">สถานที่</label>
+                    <div class="location-row">
+                        <input type="text" id="location" name="location" class="rform-input"
+                               value="{{ report['location'] or '' }}">
+                        <button type="button" class="btn-location" onclick="getLocation()">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ปุ่ม -->
+                <div style="display:flex; gap:12px; margin-top:10px;">
+                    <button type="submit" class="btn-submit" style="flex:1;">บันทึกการแก้ไข</button>
+                    <button type="submit" name="action" value="delete" class="btn-submit"
+                            style="flex:0.4; background:#EF4444;"
+                            onclick="return confirm('ต้องการลบเรื่องนี้หรือไม่?')">
+                        ลบเรื่อง
+                    </button>
+                </div>
+
+                <div style="text-align:center; margin-top:14px;">
+                    <a href="/my_reports" style="font-size:14px; color:#aaa; text-decoration:none;">
+                        ← ยกเลิก กลับหน้าปัญหาของคุณ
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectCategory(btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('category-input').value = btn.dataset.value;
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    document.getElementById('location').value =
+                        'Lat: ' + pos.coords.latitude.toFixed(5) + ', Lng: ' + pos.coords.longitude.toFixed(5);
+                });
+            } else {
+                alert('Browser ไม่รองรับการระบุตำแหน่ง');
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -12,6 +12,7 @@ from routes.dashboard     import dashboard_bp
 from routes.edit_report   import edit_report_bp
 from routes.delete_report import delete_report_bp
 from routes.search        import search_bp
+from routes.user_edit     import user_edit_bp
 
 app = Flask(__name__)
 app.secret_key = "secret123"
@@ -30,6 +31,7 @@ app.register_blueprint(dashboard_bp)
 app.register_blueprint(edit_report_bp)
 app.register_blueprint(delete_report_bp)
 app.register_blueprint(search_bp)
+app.register_blueprint(user_edit_bp)
 # ─────────────────────────────────────────────────────────
 
 # ── Context Processor ────────────────────────────────────

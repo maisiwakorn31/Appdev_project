@@ -11,7 +11,7 @@ def my_reports():
 
     conn    = get_db()
     reports = conn.execute("""
-        SELECT title, detail, image, location, reporter_name, status, created_at, category
+        SELECT id, title, detail, image, location, reporter_name, status, created_at, category
         FROM reports
         WHERE user_id=?
         ORDER BY created_at DESC

@@ -79,40 +79,40 @@
         <!-- CARDS GRID -->
         <div class="my-issue-grid" id="cardGrid">
             {% for r in reports %}
-            <div class="my-issue-card" data-title="{{ r[0] }}" data-desc="{{ r[1] }}">
+            <div class="my-issue-card" data-title="{{ r[1] }}" data-desc="{{ r[2] }}" onclick="window.location.href='/user_edit/{{ r[0] }}'" style="cursor:pointer;">
 
                 <!-- Status -->
                 <div class="card-top">
-                    {% if r[5] == 'แก้ไขแล้ว' %}
+                    {% if r[6] == 'แก้ไขแล้ว' %}
                         <span class="status-badge green"><span class="dot"></span>แก้ไขแล้ว</span>
-                    {% elif r[5] == 'กำลังดำเนินการ' %}
+                    {% elif r[6] == 'กำลังดำเนินการ' %}
                         <span class="status-badge blue"><span class="dot"></span>กำลังดำเนินการ</span>
                     {% else %}
                         <span class="status-badge orange"><span class="dot"></span>รอดำเนินการ</span>
                     {% endif %}
                                         {% set emoji_map = {"ถนน":"🚧","น้ำ":"💧","ไฟฟ้า":"⚡","ความปลอดภัย":"🛡️","น้ำท่วม":"🌧️","การจราจร":"🚦","ต้นไม้":"🌲","มลพิษ":"💨","ขยะ":"🗑️","อื่นๆ":"❓"} %}
-                    <span class="cat-emoji">{{ emoji_map.get(r[7], "❓") }}</span>
+                    <span class="cat-emoji">{{ emoji_map.get(r[8], "❓") }}</span>
                 </div>
 
                 <!-- Body -->
                 <div class="card-body">
-                    {% if r[2] %}
-                    <img class="card-img" src="{{ url_for('static', filename='uploads/' + r[2]) }}" alt="รูปปัญหา"/>
+                    {% if r[3] %}
+                    <img class="card-img" src="{{ url_for('static', filename='uploads/' + r[3]) }}" alt="รูปปัญหา"/>
                     {% else %}
                     <div class="card-img card-img-placeholder"><i class="fa-solid fa-image"></i></div>
                     {% endif %}
 
                     <div class="card-info">
                         <div class="card-label">ประเภท</div>
-                        <div class="card-title">{{ r[0] }}</div>
-                        <div class="card-desc">{{ r[1] }}</div>
+                        <div class="card-title">{{ r[2] }}</div>
+                        <div class="card-desc">{{ r[2] }}</div>
                         <hr class="card-divider">
                         <div class="card-meta">
                             {% if r[3] %}
-                            <span><i class="fa-solid fa-location-dot"></i> {{ r[3] }}</span>
+                            <span><i class="fa-solid fa-location-dot"></i> {{ r[5] }}</span>
                             {% endif %}
-                            <span><i class="fa-solid fa-user"></i> {{ r[4] }}</span>
-                            <span><i class="fa-regular fa-clock"></i> {{ r[6][:10] }}</span>
+                            <span><i class="fa-solid fa-user"></i> {{ r[5] }}</span>
+                            <span><i class="fa-regular fa-clock"></i> {{ r[7][:10] }}</span>
                         </div>
                     </div>
                 </div>
