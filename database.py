@@ -15,6 +15,7 @@ def init_db():
     conn = get_db()
     cur = conn.cursor()
 
+
     cur.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,6 +42,13 @@ def init_db():
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
+
+    cur.execute("SELECT * FROM users WHERE phone='0999999999'")
+    if not cur.fetchone():
+            cur.execute("""
+            INSERT INTO users (fullname, phone, password, role)
+            VALUES (?, ?, ?, ?)
+            """, ("Admin", "0999999999", "1234", "admin"))
 
     conn.commit()
     conn.close()
