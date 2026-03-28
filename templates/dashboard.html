@@ -31,7 +31,20 @@
                     <td>
                         <span class="status {{ r[3] }}">{{ r[3] }}</span>
                     </td>
-                    <td>{{ r[6] }}</td>        <!-- location -->
+                    <td>
+                    {% if r[6] %}
+                        {% set coords = r[6].replace('Lat: ', '').replace('Lng: ', '').split(', ') %}
+                    <a 
+                        href="https://www.google.com/maps?q={{ coords[0] }},{{ coords[1] }}" 
+                        target="_blank"
+                        class="btn-edit"
+                    >
+                    📍 ดูแผนที่
+                    </a>
+                    {% else %}
+                        -
+                    {% endif %}
+                    </td>        <!-- location -->
                     <td>{{ r[4][:10] }}</td>   <!-- date -->
                     <td>
                         <a href="{{ url_for('edit_report.edit_report', id=r[0]) }}" class="btn-edit">✏️ แก้ไข</a>

@@ -5,7 +5,7 @@ dashboard_bp = Blueprint('dashboard', __name__)
 
 @dashboard_bp.route('/dashboard')
 def dashboard():
-    # 1. เช็คก่อนว่าล็อกอินหรือยัง ถ้ายังให้เด้งไปหน้า Login
+    
     if "user_id" not in session:
         return redirect(url_for("login.login"))
 
@@ -13,9 +13,9 @@ def dashboard():
     user_id = session["user_id"]
     role = session.get("role")
 
-    # 2. แยกการดึงข้อมูลระหว่าง Admin และ User ธรรมดา
+    
     if role == "admin":
-        # ถ้าเป็น admin ให้ดึงข้อมูลและสถิติของ "ทุกคน"
+        
         stats = {
             "total":      conn.execute("SELECT COUNT(*) FROM reports").fetchone()[0],
             "pending":    conn.execute("SELECT COUNT(*) FROM reports WHERE status='รอดำเนินการ'").fetchone()[0],
@@ -30,7 +30,7 @@ def dashboard():
         """).fetchall()
 
     else:
-        # ถ้าเป็น user ให้ดึงข้อมูลและสถิติ "เฉพาะของตัวเอง" (เช็คจาก user_id)
+        
         stats = {
             "total":      conn.execute("SELECT COUNT(*) FROM reports WHERE user_id=?", (user_id,)).fetchone()[0],
             "pending":    conn.execute("SELECT COUNT(*) FROM reports WHERE status='รอดำเนินการ' AND user_id=?", (user_id,)).fetchone()[0],
