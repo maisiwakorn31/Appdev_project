@@ -8,7 +8,7 @@ search_bp = Blueprint('search', __name__)
 def search():
     conn    = get_db()
     reports = conn.execute("""
-        SELECT id, title, detail, image, status, category,location
+        SELECT user_id, title, detail, image, status, category,location
         FROM reports
         ORDER BY created_at DESC
     """).fetchall()

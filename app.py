@@ -55,7 +55,7 @@ def home():
     done       = conn.execute("SELECT COUNT(*) FROM reports WHERE status='แก้ไขแล้ว'").fetchone()[0]
 
     reports = conn.execute("""
-        SELECT id, title, detail, image, status, category
+        SELECT user_id, title, detail, image, status, category
         FROM reports
         ORDER BY created_at DESC
         LIMIT 30

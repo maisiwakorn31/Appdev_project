@@ -23,7 +23,7 @@ def dashboard():
             "done":       conn.execute("SELECT COUNT(*) FROM reports WHERE status='แก้ไขแล้ว'").fetchone()[0],
         }
         reports = conn.execute("""
-            SELECT r.id, r.title, r.status, r.created_at, u.fullname
+            SELECT r.id, r.user_id, r.title, r.status, r.created_at, u.fullname, r.location
             FROM reports r
             JOIN users u ON r.user_id = u.id
             ORDER BY r.created_at DESC
@@ -38,7 +38,7 @@ def dashboard():
             "done":       conn.execute("SELECT COUNT(*) FROM reports WHERE status='แก้ไขแล้ว' AND user_id=?", (user_id,)).fetchone()[0],
         }
         reports = conn.execute("""
-            SELECT r.id, r.title, r.status, r.created_at, u.fullname,
+            SELECT r.user_id, r.title, r.status, r.created_at, u.fullname,r.location
             FROM reports r
             JOIN users u ON r.user_id = u.id
             WHERE r.user_id = ?
