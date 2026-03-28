@@ -16,6 +16,7 @@ from routes.user_edit     import user_edit_bp
 
 app = Flask(__name__)
 app.secret_key = "secret123"
+init_db()
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -74,5 +75,4 @@ def home():
 
 
 if __name__ == "__main__":
-    init_db()
     app.run()
