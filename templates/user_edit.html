@@ -11,7 +11,7 @@
 </head>
 <body class="report-page">
 
-    <!-- NAVBAR -->
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="brand">แจ้งปัญหา</div>
@@ -35,18 +35,18 @@
         </div>
     </nav>
 
-    <!-- PAGE HEADER -->
+    
     <div class="report-header">
         <h2>แก้ไขปัญหา</h2>
         <p>แก้ไขรายละเอียดเรื่องที่แจ้งไว้</p>
     </div>
 
-    <!-- FORM -->
+    
     <div class="report-container">
         <div class="report-card">
             <form action="{{ url_for('user_edit.user_edit', id=id) }}" method="POST" enctype="multipart/form-data">
 
-                <!-- ประเภทปัญหา -->
+                
                 <div class="rform-group">
                     <label class="rform-label">ประเภทปัญหา</label>
                     <div class="category-grid">
@@ -61,19 +61,19 @@
                     <input type="hidden" name="category" id="category-input" value="{{ report['category'] }}">
                 </div>
 
-                <!-- หัวข้อ -->
+                
                 <div class="rform-group">
                     <label class="rform-label">หัวข้อปัญหา</label>
                     <input type="text" name="title" class="rform-input" value="{{ report['title'] }}" required>
                 </div>
 
-                <!-- รายละเอียด -->
+               
                 <div class="rform-group">
                     <label class="rform-label">รายละเอียด</label>
                     <textarea name="detail" class="rform-input" rows="3" style="border-radius:10px; resize:vertical;">{{ report['detail'] }}</textarea>
                 </div>
 
-                <!-- รูปภาพ -->
+                
                 <div class="rform-group">
                     <label class="rform-label">รูปภาพประกอบ</label>
                     {% if report['image'] %}
@@ -91,7 +91,7 @@
                            onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'เลือกรูปใหม่'">
                 </div>
 
-                <!-- สถานที่ -->
+                
                 <div class="rform-group">
                     <label class="rform-label">สถานที่</label>
                     <div class="location-row">
@@ -103,7 +103,7 @@
                     </div>
                 </div>
 
-                <!-- ปุ่ม -->
+                
                 <div style="display:flex; gap:12px; margin-top:10px;">
                     <button type="submit" class="btn-submit" style="flex:1;">บันทึกการแก้ไข</button>
                     <button type="submit" name="action" value="delete" class="btn-submit"

@@ -11,7 +11,7 @@
 </head>
 <body class="report-page">
 
-    <!-- NAVBAR -->
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="brand">แจ้งปัญหา</div>
@@ -35,18 +35,18 @@
         </div>
     </nav>
 
-    <!-- PAGE HEADER -->
+    
     <div class="report-header">
         <h2>แจ้งปัญหา</h2>
         <p>กรอกรายละเอียดเพื่อแจ้งปัญหาที่พบ</p>
     </div>
 
-    <!-- FORM -->
+    
     <div class="report-container">
         <div class="report-card">
             <form action="/report" method="POST" enctype="multipart/form-data">
 
-                <!-- ประเภทปัญหา -->
+                
                 <div class="rform-group">
                     <label class="rform-label">ประเภทปัญหา</label>
                     <div class="category-grid">
@@ -84,19 +84,19 @@
                     <input type="hidden" name="category" id="category-input" value="ถนน">
                 </div>
 
-                <!-- หัวข้อปัญหา -->
+                
                 <div class="rform-group">
                     <label class="rform-label">หัวข้อปัญหา</label>
                     <input type="text" name="title" class="rform-input" placeholder="">
                 </div>
 
-                <!-- รายละเอียด -->
+                
                 <div class="rform-group">
                     <label class="rform-label">รายละเอียด</label>
                     <input type="text" name="detail" class="rform-input" placeholder="">
                 </div>
 
-                <!-- รูปภาพ -->
+                
                 <div class="rform-group">
                     <label class="rform-label">รูปภาพประกอบ</label>
                     <label for="file-input" class="rform-input file-input-label">
@@ -107,7 +107,7 @@
                            onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'เลือกไฟล์รูปภาพ'">
                 </div>
 
-                <!-- สถานที่ -->
+                
                 <div class="rform-group">
                     <label class="rform-label">สถานที่</label>
                     <div class="location-row">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <!-- ชื่อ + เบอร์ -->
+            
                 <div class="rform-row">
                     <div class="rform-group">
                         <label class="rform-label">ชื่อผู้แจ้ง</label>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <!-- Submit -->
+                
                 <button type="submit" class="btn-submit">ส่งเรื่องแจ้ง</button>
 
             </form>

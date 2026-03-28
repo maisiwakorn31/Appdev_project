@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="brand">แจ้งปัญหา</div>
@@ -36,7 +36,7 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    
     <header class="hero">
         <div class="hero-content">
             <span class="badge-top">แจ้งปัญหาง่ายๆ ติดตามผลได้</span>
@@ -49,7 +49,7 @@
         </div>
     </header>
 
-    <!-- STATS -->
+    
     <section class="stats-container">
         <div class="stat-card orange">
             <i class="fa-solid fa-file-lines"></i>
@@ -73,14 +73,14 @@
         </div>
     </section>
 
-    <!-- ISSUE LIST -->
+    
     <main class="content-section">
         <h3>ปัญหาล่าสุด</h3>
         <div class="home-issue-grid">
             {% for report in reports %}
             <div class="home-issue-card">
 
-                <!-- Status + Emoji -->
+                
                 <div class="card-top">
                     {% if report[4] == 'แก้ไขแล้ว' %}
                         <span class="status-badge green"><span class="dot"></span>แก้ไขแล้ว</span>
@@ -93,7 +93,7 @@
                     <span class="cat-emoji">{{ emoji_map.get(report[5], "❓") }}</span>
                 </div>
 
-                <!-- Body: รูป + ข้อมูล -->
+            
                 <div class="card-body">
                     {% if report[3] %}
                     <img class="card-img" src="{{ url_for('static', filename='uploads/' ~ report[3]) }}" alt="รูปปัญหา"/>
@@ -102,6 +102,9 @@
                     {% endif %}
 
                     <div class="card-info">
+                        <div class="card-user">
+                            👤 ID ผู้โพสต์: {{ report[0] }}
+                         </div>
                         <div class="card-label">ประเภท</div>
                         <div class="card-title">{{ report[1] }}</div>
                         <div class="card-desc">{{ report[2] }}</div>

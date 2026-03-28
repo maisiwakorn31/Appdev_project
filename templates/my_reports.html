@@ -11,7 +11,7 @@
 </head>
 <body class="my-reports-page">
 
-    <!-- NAVBAR -->
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="brand">แจ้งปัญหา</div>
@@ -37,7 +37,7 @@
 
     <div class="my-container">
 
-        <!-- PAGE HEADER -->
+        
         <div class="my-header">
             <div>
                 <h2>ปัญหาของคุณ</h2>
@@ -46,13 +46,13 @@
             <a href="/report" class="btn-new-report">แจ้งปัญหาใหม่</a>
         </div>
 
-        <!-- SEARCH BAR -->
+        
         <div class="search-bar">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" id="searchInput" placeholder="" oninput="filterCards()">
         </div>
 
-        <!-- STATS -->
+        
         <div class="my-stats">
             <div class="stat-card orange">
                 <i class="fa-solid fa-file-lines"></i>
@@ -76,12 +76,12 @@
             </div>
         </div>
 
-        <!-- CARDS GRID -->
+        
         <div class="my-issue-grid" id="cardGrid">
             {% for r in reports %}
             <div class="my-issue-card" data-title="{{ r[1] }}" data-desc="{{ r[2] }}" onclick="window.location.href='/user_edit/{{ r[0] }}'" style="cursor:pointer;">
 
-                <!-- Status -->
+                
                 <div class="card-top">
                     {% if r[6] == 'แก้ไขแล้ว' %}
                         <span class="status-badge green"><span class="dot"></span>แก้ไขแล้ว</span>
@@ -94,7 +94,7 @@
                     <span class="cat-emoji">{{ emoji_map.get(r[8], "❓") }}</span>
                 </div>
 
-                <!-- Body -->
+                
                 <div class="card-body">
                     {% if r[3] %}
                     <img class="card-img" src="{{ url_for('static', filename='uploads/' + r[3]) }}" alt="รูปปัญหา"/>

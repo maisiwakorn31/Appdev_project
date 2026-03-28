@@ -15,6 +15,7 @@
         <table class="report-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>หัวข้อ</th>
                     <th>สถานะ</th>
                     <th>วันที่แจ้ง</th>
@@ -24,6 +25,7 @@
             <tbody>
                 {% for r in reports %}
                 <tr>
+                    <td>{{ r[0] }}</td>
                     <td>{{ r[1] }}</td>
                     <td>
                         <span class="status {{ r[2] }}">{{ r[2] }}</span>
@@ -42,19 +44,19 @@
 </div>
 
 <script>
-    // 1. ให้ระบบจำสิทธิ์ปัจจุบันตอนที่โหลดหน้าเว็บขึ้นมาครั้งแรก
+    
     let currentRole = "{{ session.get('role') }}";
 
-    // 2. ตั้งเวลาให้แอบเช็คทุกๆ 3 วินาที (3000 มิลลิวินาที)
+    
     setInterval(function() {
         fetch('/api/check_role')
             .then(response => response.json())
             .then(data => {
-                // 3. ถ้าเช็คแล้วพบว่าสิทธิ์ในฐานข้อมูล "ไม่ตรง" กับที่จำไว้ตอนแรก!
+                
                 if (data.role && data.role !== currentRole) {
                     console.log("สิทธิ์เปลี่ยนแล้ว! กำลังรีเฟรชหน้าจอ...");
                     
-                    // สั่งให้เบราว์เซอร์รีเฟรชตัวเองอัตโนมัติทันที
+                    
                     window.location.reload(); 
                 }
             })

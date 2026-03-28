@@ -21,7 +21,7 @@ UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# ── Register Blueprints ──────────────────────────────────
+
 app.register_blueprint(login_bp)
 app.register_blueprint(register_bp)
 app.register_blueprint(logout_bp)
@@ -32,17 +32,16 @@ app.register_blueprint(edit_report_bp)
 app.register_blueprint(delete_report_bp)
 app.register_blueprint(search_bp)
 app.register_blueprint(user_edit_bp)
-# ─────────────────────────────────────────────────────────
 
-# ── Context Processor ────────────────────────────────────
-# ส่ง is_admin_user ไปให้ทุก HTML อัตโนมัติ ไม่ต้องส่งทีละ route
+
+
 @app.context_processor
 def inject_globals():
     return {
         "is_admin_user": is_admin(),
         "is_logged_in": "user_id" in session,
     }
-# ─────────────────────────────────────────────────────────
+
 
 
 @app.route('/')
@@ -72,6 +71,8 @@ def home():
     )
 
 
+
+
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run()
