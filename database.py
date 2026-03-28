@@ -43,12 +43,10 @@ def init_db():
     )
     """)
 
-    cur.execute("SELECT * FROM users WHERE phone='0999999999'")
-    if not cur.fetchone():
-            cur.execute("""
-            INSERT INTO users (fullname, phone, password, role)
-            VALUES (?, ?, ?, ?)
-            """, ("Admin", "0999999999", "1234", "admin"))
+    cur.execute("""
+INSERT OR IGNORE INTO users (fullname, phone, password, role)
+VALUES (?, ?, ?, ?)
+""", ("Admin", "0000000000", "abc1234", "admin"))
 
     conn.commit()
     conn.close()
